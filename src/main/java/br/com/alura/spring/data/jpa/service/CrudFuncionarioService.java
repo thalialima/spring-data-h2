@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.alura.spring.data.jpa.orm.Cargo;
@@ -56,7 +60,7 @@ public class CrudFuncionarioService {
 				atualizar(scanner);
 				break;
 			case 3:
-				visualizar();
+				visualizar(scanner);
 				break;
 			case 4:
 				deletar(scanner);
@@ -151,8 +155,19 @@ public class CrudFuncionarioService {
 		System.out.println("Alterado");
 	}
 
-	private void visualizar() {
-		Iterable<Funcionario> funcionarios = funcionarioRepository.findAll();
+	private void visualizar(Scanner scanner) {
+		System.out.println("Qual página você deseja visualizar");
+		Integer page = scanner.nextInt();
+		
+		//delimita a paginação
+		Pageable pegeable = PageRequest.of(page, 5, Sort.by(Sort.Direction.ASC, "nome"));
+		Page<Funcionario> funcionarios = funcionarioRepository.findAll(pegeable);
+		
+		System.out.println(funcionarios);
+		//getNumber() retorna qual a página que o cliente está visualizando no momento atual
+		System.out.println("Página atual: " + funcionarios.getNumber());
+		//getTotalElements() mostra o total de elementos que tem nesta consulta
+		System.out.println("Total de elementos: " + funcionarios.getTotalElements());
 		funcionarios.forEach(funcionario -> System.out.println(funcionario));
 	}
 
