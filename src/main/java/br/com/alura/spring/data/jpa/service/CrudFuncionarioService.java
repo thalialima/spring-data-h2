@@ -21,7 +21,7 @@ import br.com.alura.spring.data.jpa.repository.UnidadeDeTrabalhoRepository;
 @Service
 public class CrudFuncionarioService {
 
-	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ss/MM/yyyy");
+	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	private Boolean system = true;
 
@@ -86,7 +86,6 @@ public class CrudFuncionarioService {
 		System.out.println("Id do cargo:");
 		Long cargoId = scanner.nextLong();
 		
-		
 		List<UnidadeDeTrabalho> unidades = unidade(scanner);
 		
 		Funcionario funcionario = new Funcionario();
@@ -107,7 +106,7 @@ public class CrudFuncionarioService {
 		List<UnidadeDeTrabalho> unidades = new ArrayList<UnidadeDeTrabalho>();
 
 		while (isTrue) {
-			System.out.println("Digie o Id da unidade (Para sair digite 0)");
+			System.out.println("Digite o Id da unidade (Para sair digite 0)");
 			Long unidadeId = scanner.nextLong();
 
 			if (unidadeId != 0) {

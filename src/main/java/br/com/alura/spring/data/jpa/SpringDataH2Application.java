@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import br.com.alura.spring.data.jpa.service.CrudCargoService;
 import br.com.alura.spring.data.jpa.service.CrudFuncionarioService;
 import br.com.alura.spring.data.jpa.service.CrudUnidadeDeTrabalhoService;
+import br.com.alura.spring.data.jpa.service.RelatoriosService;
 
 @EnableJpaRepositories
 @SpringBootApplication
@@ -19,16 +20,18 @@ public class SpringDataH2Application implements CommandLineRunner {
 	private final CrudCargoService cargoService;
 	private final CrudFuncionarioService funcionarioService;
 	private final CrudUnidadeDeTrabalhoService unidadeDeTrabalhoService;
+	private final RelatoriosService relatoriosService;
 	
 	private Boolean system = true;
 
 	// o framework spring irá criar uma instância da interface CargoRepository
 	public SpringDataH2Application(CrudCargoService cargoService, CrudFuncionarioService funcionarioService, 
-			CrudUnidadeDeTrabalhoService unidadeDeTrabalhoService) {
+			CrudUnidadeDeTrabalhoService unidadeDeTrabalhoService, RelatoriosService relatoriosService) {
 		
 		this.cargoService = cargoService;
 		this.funcionarioService = funcionarioService;
 		this.unidadeDeTrabalhoService = unidadeDeTrabalhoService;
+		this.relatoriosService = relatoriosService;
 	}
 
 	public static void main(String[] args) {
@@ -41,11 +44,12 @@ public class SpringDataH2Application implements CommandLineRunner {
 		Scanner scanner = new Scanner(System.in);
 
 		while (system) {
-			System.out.println("Qual ação você que executar?");
+			System.out.println("Qual ação você quer executar?");
 			System.out.println("0 - Sair");
 			System.out.println("1 - Funcionário");
 			System.out.println("2 - Cargo");
 			System.out.println("3 - Unidade de Trabalho");
+			System.out.println("4 - Relatórios");
 
 			// pega um valor inteiro que o usuário digita no console
 			int action = scanner.nextInt();
@@ -55,9 +59,13 @@ public class SpringDataH2Application implements CommandLineRunner {
 				funcionarioService.inicial(scanner);
 				break;
 			case 2:
+				cargoService.inicial(scanner);
 				break;
 			case 3:
 				unidadeDeTrabalhoService.inicial(scanner);
+				break;
+			case 4:
+				relatoriosService.inicial(scanner);
 				break;
 			default:
 				System.out.println("Finalizando");

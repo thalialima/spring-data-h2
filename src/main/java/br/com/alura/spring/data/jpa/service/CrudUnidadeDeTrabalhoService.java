@@ -50,6 +50,8 @@ public class CrudUnidadeDeTrabalhoService {
 	}
 
 	private void salvar(Scanner scanner) {
+		
+		scanner.useDelimiter("\n");
 		System.out.println("Informe a descrição da unidade:");
 		String descricao = scanner.next();
 
@@ -65,6 +67,7 @@ public class CrudUnidadeDeTrabalhoService {
 	}
 
 	private void atualizar(Scanner scanner) {
+		
 		System.out.println("Informe o id: ");
 		Long id = scanner.nextLong();
 
