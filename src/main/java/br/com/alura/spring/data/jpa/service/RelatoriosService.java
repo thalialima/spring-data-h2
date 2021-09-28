@@ -10,6 +10,7 @@ import org.hibernate.type.LocalDateTimeType;
 import org.springframework.stereotype.Service;
 
 import br.com.alura.spring.data.jpa.orm.Funcionario;
+import br.com.alura.spring.data.jpa.orm.FuncionarioProjecao;
 import br.com.alura.spring.data.jpa.repository.FuncionarioRepository;
 
 @Service
@@ -32,6 +33,7 @@ public class RelatoriosService {
 			System.out.println("1 - Buscar Funcionário por nome");
 			System.out.println("2 - Buscar Funcionário por nome, data de contratação e salário");
 			System.out.println("3 - Buscar Funcionário por data de contratação");
+			System.out.println("4 - Pesquisa Funcionário por Salário");
 
 			int action = scanner.nextInt();
 
@@ -44,6 +46,9 @@ public class RelatoriosService {
 				break;
 			case 3:
 				buscaFuncionarioDataContratacao(scanner);
+				break;
+			case 4:
+				pesquisaFuncionarioSalario();
 				break;
 			default:
 				system = false;
@@ -89,6 +94,11 @@ public class RelatoriosService {
 	}
 	
 
+	private void pesquisaFuncionarioSalario() {
+		List<FuncionarioProjecao> list = funcionarioRepository.findFuncionarioSalario();
+		list.forEach(f -> System.out.println("Funcionario: Id: " + f.getId() 
+		+ " | Nome: " + f.getNome() + " | Salário: " + f.getSalario()));
+	}
 	
 	
 }
